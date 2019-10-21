@@ -1,0 +1,110 @@
+﻿# Experiment  – BEEE Evaluation
+
+
+## Aim:
+Design automatic led Diwali lights (consisting of 6 led’s) such that it only works during night and can generate two patterns which can be toggled with switch. a. Pattern 1 –led chaser b. Pattern 2 – even-odd led’s.
+
+## Apparatus:
+Arduino Board, LED, Resistance - 220ohm, Breadboard, Wires, Push Button, LDR (Photodiode).
+
+## Circuit Diagram:
+![Evaluation](https://user-images.githubusercontent.com/54620652/67214276-15f3ea80-f43d-11e9-8103-1da626d00c9e.png)
+
+## Theory:
+**Concepts Used -**\
+LEDs:
+An LED is a small light (it stands for "light emitting diode") that works with relatively little power. The Arduino board has one built-in on digital pin 13.
+An external LED can also be used by specifying the pin number it is using on the Arduino.
+In electronics, polarity indicates whether a circuit component is symmetric or not. LEDs, being diodes, will only allow current to flow in one direction. And when there’s no current-flow, there’s no light.
+The positive side of the LED is called the “anode” and is marked by having a longer “lead,” or leg. The other, negative side of the LED is called the “cathode.” Current flows from the anode to the cathode and never the opposite direction. A reversed LED can keep an entire circuit from operating properly by blocking current flow. So don’t freak out if adding an LED breaks your circuit. Try flipping it around.\
+**Learning and Observations -**
+1. We can recognize the positive and negative terminals of an LED even without using a Multimeter. The longer leg of the LED is the positive terminal (or the anode) and the smaller leg is the negative terminal (or the cathode).
+2. Another way of finding the positive and negative terminals of an LED is to see the parts inside the LED. The larger part is the negative side (i.e. the cathode) and the smaller part is the positive side (i.e. the anode).
+
+## Problems and Troubleshooting:
+1. The first problem that we faced was due to the cable of the Arduino which was not working properly. This problem was solved by using another cable.
+2. The proper port of the Arduino was not selected. After it was selected the Arduino worked perfectly.
+3. The code had some errors like proper pin was not mentioned, etc. But after modifying the code, everything worked perfectly fine.
+
+## Precautions:
+1. The Arduino and its cable should be working properly.
+2. Proper port of the Arduino should be selected.
+3. The connections should be made neat and clean.
+4. Desired resistance should be used.
+
+## Arduino Code:
+```
+//BEEE Evaluation
+const int button = 8;
+int count = 2;
+
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(2,OUTPUT);
+  pinMode(3,OUTPUT);
+  pinMode(4,OUTPUT);
+  pinMode(5,OUTPUT);
+  pinMode(6,OUTPUT);
+  pinMode(7,OUTPUT);
+  pinMode(button,INPUT);
+}
+
+void loop()
+{
+  int c = analogRead(A0);
+  delay(500);
+  if(c<300)
+  {
+    if(digitalRead(button)==HIGH){
+      delay(500);
+      count++;
+      }
+      
+    if(count%2==0){
+      for(int i=2;i<=7;i++)
+  {
+     digitalWrite(i,HIGH);
+  	 delay(100);
+  	 digitalWrite(i,LOW);
+     delay(100);
+  }
+      }
+    if(count%2!=0){
+      for(int i=0;i<6;i++)
+  {
+    if(i==0)
+    {
+     digitalWrite(2, HIGH);
+     digitalWrite(4, HIGH);
+     digitalWrite(6, HIGH);
+  	 delay(1000);
+  	 digitalWrite(2, LOW);
+     digitalWrite(4, LOW);
+     digitalWrite(6, LOW);
+    }
+    if(i==1)
+    {
+     digitalWrite(3, HIGH);
+     digitalWrite(5, HIGH);
+     digitalWrite(7, HIGH);
+     delay(1000);
+     digitalWrite(3, LOW);
+     digitalWrite(5, LOW);
+     digitalWrite(7, LOW);
+    }
+  }
+      }     
+  }
+  else
+  {
+    digitalWrite(2,LOW);
+    delay(1000);
+  } 
+}
+//Made by - Saurav Shekhar
+//UID - 19BCS3538
+```
+
+## Result:
+LED chasing as per the question was verified after uploading the program.
