@@ -102,8 +102,8 @@ void loop()
     delay(1000);
   } 
 }
-//Made by - Anshul Verma
-//UID - 19BCS3537
+//Made by - Saurav Shekhar
+//UID - 19BCS3538
 ```
 
 ## Result:
